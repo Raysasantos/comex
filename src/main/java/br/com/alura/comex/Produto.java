@@ -1,10 +1,10 @@
 package br.com.alura.comex;
 
 public class Produto {
-    String nome;
-    String descricao;
-    double precounitario;
-    int quantidade;
+    public String nome;
+    public String descricao;
+    public double precounitario;
+    public int quantidade;
 
     @Override
     public String toString() {

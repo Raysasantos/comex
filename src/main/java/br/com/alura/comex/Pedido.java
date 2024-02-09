@@ -1,41 +1,29 @@
 package br.com.alura.comex;
 
 import java.math.BigDecimal;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 
 public class Pedido {
-
-    private String categoria;
-    private String produto;
-    private String cliente;
-
-    private BigDecimal preco;
+    private int ID;
+    private Cliente cliente;
+    private double preco;
     private int quantidade;
+    public Pedido() {
+    }
 
-    private LocalDate data;
-
-    public Pedido(String categoria, String produto, String cliente, BigDecimal preco, int quantidade, LocalDate data) {
-        this.categoria = categoria;
-        this.produto = produto;
-        this.cliente = cliente;
+    public Pedido(Cliente cliente, double preco, int quantidade) {
         this.preco = preco;
+        this.cliente = cliente;
         this.quantidade = quantidade;
-        this.data = data;
+
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public String getProduto() {
-        return produto;
-    }
-
-    public String getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public BigDecimal getPreco() {
+    public double getPreco() {
         return preco;
     }
 
@@ -43,20 +31,54 @@ public class Pedido {
         return quantidade;
     }
 
-    public LocalDate getData() {
-        return data;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
     @Override
     public String toString() {
         return "Pedido{" +
-                "categoria='" + categoria + '\'' +
-                ", produto='" + produto + '\'' +
-                ", cliente='" + cliente + '\'' +
+                "ID=" + ID +
+                ", cliente=" + cliente +
                 ", preco=" + preco +
                 ", quantidade=" + quantidade +
-                ", data=" + data +
+                ", valor total =" + getValorTotal() +
                 '}';
-    }
 
+
+
+        }
+
+    public boolean isMaisBaratoQue(Pedido outroPedido) {
+        if (preco< outroPedido.preco){
+            return true;
+        } else {
+            return false;
+        }
+
+
+    }
+    public boolean isMaisCaroQue(Pedido outroPedido) {
+        if (preco> outroPedido.preco){
+            return true;
+        } else {
+            return false;
+
+        }
+
+    }
+    public BigDecimal getValorTotal() {
+        BigDecimal precobig = BigDecimal.valueOf(this.preco);
+        BigDecimal quantidadebig = BigDecimal.valueOf(this.quantidade);
+        return precobig.multiply(quantidadebig);
+
+    }
 }
